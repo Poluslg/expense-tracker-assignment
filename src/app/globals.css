@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #f6f3ec;
+  --card: #ffffff;
+  --ink: #1d1b16;
+  --muted: #8c8678;
+  --line: #e8e2d6;
+  --accent: #11705f;
+  --accent-ink: #ffffff;
+  --danger: #b23b2e;
+  --chip: #f0ece2;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.serif {
+  font-family: "Iowan Old Style", Georgia, "Times New Roman", serif;
+}
+
+button { font-family: inherit; cursor: pointer; border: none; }
+input, select, textarea { font-family: inherit; }
