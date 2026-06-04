@@ -10,16 +10,25 @@
   --accent-ink: #ffffff;
   --danger: #b23b2e;
   --chip: #f0ece2;
+  --error: #b23b2e;
 }
 
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   background: var(--bg);
   color: var(--ink);
-  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -27,5 +36,13 @@ html, body {
   font-family: "Iowan Old Style", Georgia, "Times New Roman", serif;
 }
 
-button { font-family: inherit; cursor: pointer; border: none; }
-input, select, textarea { font-family: inherit; }
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+}
+input,
+select,
+textarea {
+  font-family: inherit;
+}
