@@ -12,7 +12,18 @@
   --chip: #f0ece2;
   --error: #b23b2e;
 }
-
+@theme {
+  --color-bg: #f6f3ec;
+  --color-card: #ffffff;
+  --color-ink: #1d1b16;
+  --color-muted: #8c8678;
+  --color-line: #e8e2d6;
+  --color-accent: #11705f;
+  --color-accent-ink: #ffffff;
+  --color-danger: #b23b2e;
+  --color-chip: #f0ece2;
+  --color-error: #b23b2e;
+}
 * {
   box-sizing: border-box;
 }
