@@ -72,6 +72,7 @@ export default function ExpenseForm({ onAdd }: ExpenseFormProps) {
             className="flex-1 cursor-pointer bg-bg border border-line rounded-[10px] px-3.25 py-2.75 text-[15px] text-ink outline-none focus:border-gray-400"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
+            aria-label="Select category"
           >
             <option value="">Select category</option>
             {CATEGORIES.map((cat) => (
