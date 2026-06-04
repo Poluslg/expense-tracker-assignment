@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { SEED, Expense } from "@/lib/data";
 import ExpenseForm from "@/components/ExpenseForm";
 import ExpenseLists from "@/components/ExpenseLists";
@@ -9,7 +9,16 @@ import { formatCurrency } from "@/lib/formatCurrency";
 export default function Daybook() {
   const [expenses, setExpenses] = useState<Expense[]>(SEED);
   const [query, setQuery] = useState("");
-  const total = expenses.reduce((sum, e) => sum + e.amount, 0);
+
+  const filtered = useMemo(
+    () =>
+      expenses.filter((e) =>
+        e.description.toLowerCase().includes(query.toLowerCase()),
+      ),
+    [expenses, query],
+  );
+
+  const total = filtered.reduce((sum, e) => sum + e.amount, 0);
 
   function deleteExpense(id: number) {
     setExpenses(expenses.filter((e) => e.id !== id));
@@ -45,7 +54,7 @@ export default function Daybook() {
         }}
       >
         <div style={{ fontSize: 14, color: "var(--muted)" }}>
-          {expenses.length} expenses
+          {filtered.length} {query ? "results" : "expenses"}
         </div>
         <div style={{ fontSize: 20, fontWeight: 700 }}>
           Total: {formatCurrency(total)}
@@ -71,8 +80,7 @@ export default function Daybook() {
 
       {/* List */}
       <ExpenseLists
-        expenses={expenses}
-        query={query}
+        expenses={filtered}
         onDelete={deleteExpense}
       />
     </div>

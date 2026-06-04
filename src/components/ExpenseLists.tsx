@@ -2,32 +2,23 @@
 import { Expense } from "@/lib/data";
 import { formatDate } from "@/lib/formatDate";
 import { DeleteDialog } from "./common/DeleteDialog";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { formatCurrency } from "@/lib/formatCurrency";
 
 export default function ExpenseLists({
   expenses,
-  query,
   onDelete,
 }: {
   expenses: Expense[];
-  query: string;
   onDelete: (id: number) => void;
 }) {
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [selectedExpense, setSelectedExpense] = useState<Expense | null>(null);
-  const filtered = useMemo(
-    () =>
-      expenses.filter((e) =>
-        e.description.toLowerCase().includes(query.toLowerCase()),
-      ),
-    [expenses, query],
-  );
 
   return (
     <div>
-      {filtered.length > 0 ? (
-        filtered.map((e) => (
+      {expenses.length > 0 ? (
+        expenses.map((e) => (
           <div
             key={e.id}
             className="flex items-center gap-3 bg-card border border-line rounded-xl px-4 py-3 mb-2.5"
