@@ -65,6 +65,9 @@ export default function ExpenseForm({ onAdd }: ExpenseFormProps) {
             placeholder="Amount"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
+            onKeyDown={(e) => ["e", "E", "+", "-"].includes(e.key) && e.preventDefault()}
+            min={0.01}
+            step="0.01"
             className="w-full min-[500px]:w-32.5 bg-bg border border-line rounded-[10px] px-3.25 py-2.75 text-[15px] text-ink outline-none focus:border-gray-400"
           />
           <select
