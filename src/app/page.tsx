@@ -4,6 +4,7 @@ import { useState } from "react";
 import { SEED, Expense } from "@/lib/data";
 import ExpenseForm from "@/components/ExpenseForm";
 import ExpenseLists from "@/components/ExpenseLists";
+import { formatCurrency } from "@/lib/formatCurrency";
 
 export default function Daybook() {
   const [expenses, setExpenses] = useState<Expense[]>(SEED);
@@ -46,7 +47,9 @@ export default function Daybook() {
         <div style={{ fontSize: 14, color: "var(--muted)" }}>
           {expenses.length} expenses
         </div>
-        <div style={{ fontSize: 20, fontWeight: 700 }}>Total: {total}</div>
+        <div style={{ fontSize: 20, fontWeight: 700 }}>
+          Total: {formatCurrency(total)}
+        </div>
       </div>
 
       {/* Search */}
