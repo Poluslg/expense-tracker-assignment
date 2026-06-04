@@ -62,7 +62,9 @@ export default function Daybook() {
       </div>
 
       {/* Search */}
+      <label htmlFor="search" className="sr-only">Search expenses</label>
       <input
+        id="search"
         placeholder="Search expenses"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
