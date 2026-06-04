@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { SEED, Expense } from "@/lib/data";
+import { formatDate } from "@/lib/formatDate";
 
 export default function Daybook() {
   const [expenses, setExpenses] = useState<Expense[]>(SEED);
@@ -160,7 +161,7 @@ export default function Daybook() {
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ fontSize: 15, fontWeight: 600 }}>{e.description}</div>
               <div style={{ fontSize: 12.5, color: "var(--muted)", marginTop: 3 }}>
-                {e.date}
+                {formatDate(e.date)}
               </div>
             </div>
             <span
