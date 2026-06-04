@@ -1,3 +1,4 @@
+"use client";
 import { Expense } from "@/lib/data";
 import { formatDate } from "@/lib/formatDate";
 import { DeleteDialog } from "./common/DeleteDialog";
@@ -46,6 +47,7 @@ export default function ExpenseLists({
 
             <button
               type="button"
+              aria-label={`delete expense ${e.description}`}
               onClick={() => {
                 setSelectedExpense(e);
                 setDeleteDialogOpen(true);
