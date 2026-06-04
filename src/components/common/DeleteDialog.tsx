@@ -10,59 +10,7 @@ interface DeleteDialogProps {
   itemText?: string;
 }
 
-const dialogStyles = `
-  @keyframes slideUpFromBottom {
-    from {
-      opacity: 0;
-      transform: translateY(100px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
 
-  @keyframes slideDownToBottom {
-    from {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    to {
-      opacity: 0;
-      transform: translateY(100px);
-    }
-  }
-
-  dialog[open]::backdrop {
-    animation: fadeIn 0.3s ease-out;
-  }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-
-  @keyframes fadeOut {
-    from {
-      opacity: 1;
-    }
-    to {
-      opacity: 0;
-    }
-  }
-
-  dialog.dialog-closing::backdrop {
-    animation: fadeOut 0.3s ease-out forwards;
-  }
-
-  dialog.dialog-closing {
-    animation: slideDownToBottom 0.3s ease-out forwards;
-  }
-`;
 
 export const DeleteDialog: React.FC<DeleteDialogProps> = ({
   isOpen,
@@ -100,7 +48,6 @@ export const DeleteDialog: React.FC<DeleteDialogProps> = ({
 
   return (
     <>
-      <style>{dialogStyles}</style>
       <dialog
         ref={dialogRef}
         aria-labelledby="delete-dialog-title"
