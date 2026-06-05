@@ -6,19 +6,39 @@ import ExpenseForm from "@/components/ExpenseForm";
 import ExpenseLists from "@/components/ExpenseLists";
 import { formatCurrency } from "@/lib/formatCurrency";
 
+type SortOption = "date-desc" | "date-asc" | "amount-desc" | "amount-asc";
+
 export default function Daybook() {
   const [expenses, setExpenses] = useState<Expense[]>(SEED);
   const [query, setQuery] = useState("");
+  const [sortBy, setSortBy] = useState<SortOption>("date-desc");
 
-  const filtered = useMemo(
-    () =>
-      expenses.filter((e) =>
-        e.description.toLowerCase().includes(query.toLowerCase()),
-      ),
-    [expenses, query],
-  );
+  const processedExpenses = useMemo(() => {
+    // 1. First, filter by the search query
+    let result = expenses.filter((e) =>
+      e.description.toLowerCase().includes(query.toLowerCase()),
+    );
 
-  const total = filtered.reduce((sum, e) => sum + e.amount, 0);
+    // 2. Then, sort the filtered results
+    result = result.sort((a, b) => {
+      switch (sortBy) {
+        case "date-asc":
+          return new Date(a.date).getTime() - new Date(b.date).getTime();
+        case "date-desc":
+          return new Date(b.date).getTime() - new Date(a.date).getTime();
+        case "amount-asc":
+          return a.amount - b.amount;
+        case "amount-desc":
+          return b.amount - a.amount;
+        default:
+          return 0;
+      }
+    });
+
+    return result;
+  }, [expenses, query, sortBy]);
+
+  const total = processedExpenses.reduce((sum, e) => sum + e.amount, 0);
 
   function deleteExpense(id: number) {
     setExpenses(expenses.filter((e) => e.id !== id));
@@ -54,7 +74,7 @@ export default function Daybook() {
         }}
       >
         <div style={{ fontSize: 14, color: "var(--muted)" }}>
-          {filtered.length} {query ? "results" : "expenses"}
+          {processedExpenses.length} {query ? "results" : "expenses"}
         </div>
         <div style={{ fontSize: 20, fontWeight: 700 }}>
           Total: {formatCurrency(total)}
@@ -62,7 +82,9 @@ export default function Daybook() {
       </div>
 
       {/* Search */}
-      <label htmlFor="search" className="sr-only">Search expenses</label>
+      <label htmlFor="search" className="sr-only">
+        Search expenses
+      </label>
       <input
         id="search"
         placeholder="Search expenses"
@@ -80,11 +102,23 @@ export default function Daybook() {
         }}
       />
 
+      {/* Sort */}
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-lg font-semibold text-ink">Transactions</h2>
+        <select
+          value={sortBy}
+          onChange={(e) => setSortBy(e.target.value as SortOption)}
+          className="bg-card border border-line rounded-lg px-3 py-1.5 text-sm text-ink outline-none focus:border-gray-400 cursor-pointer"
+        >
+          <option value="date-desc">Newest First</option>
+          <option value="date-asc">Oldest First</option>
+          <option value="amount-desc">Highest Amount</option>
+          <option value="amount-asc">Lowest Amount</option>
+        </select>
+      </div>
+
       {/* List */}
-      <ExpenseLists
-        expenses={filtered}
-        onDelete={deleteExpense}
-      />
+      <ExpenseLists expenses={processedExpenses} onDelete={deleteExpense} />
     </div>
   );
 }

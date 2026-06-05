@@ -58,6 +58,10 @@
 **Found:** The amount input, category input, and Add button were in a fixed horizontal row that broke on small screens.  
 **Fixed:** Added a responsive layout using a Tailwind breakpoint (`min-[500px]:flex-row`) so the inputs stack vertically on narrow screens and sit side-by-side on wider ones.
 
+### 15. Data Sorting & Performance Optimization
+* **Found:** The expense list was static, making it difficult for users to analyze their financial data (e.g., finding the highest expense or the oldest transaction).
+* **Changed:** Implemented a multi-criteria sorting feature allowing users to order transactions by Date (Newest/Oldest) and Amount (Highest/Lowest). Integrated the sorting algorithm directly into the existing `useMemo` hook, ensuring that both search filtering and sorting remain highly performant without triggering unnecessary component re-renders.
+
 ---
 
 ## Deliberately Not Fixed
